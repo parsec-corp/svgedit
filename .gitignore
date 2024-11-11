@@ -17,4 +17,5 @@ instrumented
 .DS_Store
 .idea
 dist
+.vs
 coverage/coverage-summary.json

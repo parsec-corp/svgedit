@@ -134,6 +134,8 @@ export default class ConfigObj {
       // The following path configuration items are disallowed in the URL (as should any future path configurations)
       imgPath: './images',
       extPath: './extensions',
+      compPath: './components',
+      cssIconFilePath: './styles/bootstrap-icons.css',
       // DOCUMENT PROPERTIES
       // Change the following to a preference (already in the Document Properties dialog)?
       dimensions: [640, 480],
