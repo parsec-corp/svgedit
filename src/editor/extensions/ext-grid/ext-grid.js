@@ -162,7 +162,7 @@ export default {
         const buttonTemplate = document.createElement('template')
         const title = `${name}:buttons.0.title`
         buttonTemplate.innerHTML = `
-          <se-button id="view_grid" title="${title}" src="grid.svg"></se-button>
+          <ts-button id="view_grid" title="${title}" icon="bi bi-grid-3x3"></ts-button>
         `
         $id('editor_panel').append(buttonTemplate.content.cloneNode(true))
         $click($id('view_grid'), () => {

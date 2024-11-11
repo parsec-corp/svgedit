@@ -67,9 +67,13 @@ export class ToolButton extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' })
 
     const style = document.createElement('style');
-    style.textContent = `
-      @import url("${svgEditor.configObj.curConfig.cssIconFilePath}");
-    `;
+
+    const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
+    var styleCtx = '';
+    cssIconPaths.forEach((path) => {
+      styleCtx += `@import url("${path}");`;
+    });
+    style.textContent = styleCtx;
     this._shadowRoot.append(style);
 
     this._shadowRoot.append(template.content.cloneNode(true))
