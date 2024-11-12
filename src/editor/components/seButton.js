@@ -37,6 +37,15 @@ template.innerHTML = `
     width: 100%;
     height: 100%;
   }
+  i {
+    color: var(--icon-color);
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .small i {
+    font-size: 10px;
+    line-height: 14px;
+  }
   .pressed {
     background-color: var(--icon-bg-color-hover);
   }
@@ -46,6 +55,7 @@ template.innerHTML = `
   }
   </style>
   <div title="title">
+    <i alt="icon"></i>
     <img alt="icon">
   </div>
 `
@@ -56,23 +66,28 @@ export class ToolButton extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.append(template.content.cloneNode(true))
     // locate the component
     this.$div = this._shadowRoot.querySelector('div')
+
     this.$img = this._shadowRoot.querySelector('img')
+    this.$img.setAttribute('style', 'display: none;')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
+
+    this.$icon = this._shadowRoot.querySelector('i')
+    this.$icon.setAttribute('style', 'display: none;')
   }
 
   /**
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
-    return ['title', 'src', 'pressed', 'disabled', 'size', 'style']
+  static get observedAttributes() {
+    return ['title', 'src', 'pressed', 'disabled', 'size', 'style', 'icon']
   }
 
   /**
@@ -82,7 +97,7 @@ export class ToolButton extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'title':
@@ -100,6 +115,22 @@ export class ToolButton extends HTMLElement {
         } else {
           this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         }
+        this.$img.setAttribute('style', 'display: block;')
+        break
+      case 'icon':
+        this.$icon.setAttribute('class', newValue);
+        this.$icon.setAttribute('style', 'display: block;')
+
+        // add icon css
+        const style = document.createElement('style');
+        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
+        var styleCtx = '';
+        cssIconPaths.forEach((path) => {
+          styleCtx += `@import url("${path}");`;
+        });
+        style.textContent = styleCtx;
+        this._shadowRoot.prepend(style);
+
         break
       case 'pressed':
         if (newValue === null) {
@@ -132,7 +163,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -140,7 +171,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -148,7 +179,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get pressed () {
+  get pressed() {
     return this.hasAttribute('pressed')
   }
 
@@ -156,7 +187,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set pressed (value) {
+  set pressed(value) {
     // boolean value => existence = true
     if (value) {
       this.setAttribute('pressed', 'true')
@@ -169,7 +200,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get disabled () {
+  get disabled() {
     return this.hasAttribute('disabled')
   }
 
@@ -177,7 +208,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set disabled (value) {
+  set disabled(value) {
     // boolean value => existence = true
     if (value) {
       this.setAttribute('disabled', 'true')
@@ -190,7 +221,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get src () {
+  get src() {
     return this.getAttribute('src')
   }
 
@@ -198,7 +229,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set src (value) {
+  set src(value) {
     this.setAttribute('src', value)
   }
 
@@ -206,7 +237,23 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get size () {
+  get icon() {
+    return this.getAttribute('icon')
+  }
+
+  /**
+   * @function set
+   * @returns {void}
+   */
+  set icon(value) {
+    this.setAttribute('icon', value)
+  }
+
+  /**
+   * @function get
+   * @returns {any}
+   */
+  get size() {
     return this.getAttribute('size')
   }
 
@@ -214,7 +261,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set size (value) {
+  set size(value) {
     this.setAttribute('size', value)
   }
 
@@ -222,7 +269,7 @@ export class ToolButton extends HTMLElement {
    * @function connectedCallback
    * @returns {void}
    */
-  connectedCallback () {
+  connectedCallback() {
     // capture shortcuts
     const shortcut = this.getAttribute('shortcut')
     if (shortcut) {

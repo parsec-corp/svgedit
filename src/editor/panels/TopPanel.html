@@ -4,40 +4,38 @@
   </div> <!-- title panel -->
   <div id="editor_panel">
     <div class="tool_sep"></div>
-    <ts-button id="tool_source" title="tools.tool_source" shortcut="U" src="source.svg" icon="bi bi-gear"></ts-button>
-    <ts-button id="tool_wireframe" title="tools.wireframe_mode" shortcut="F" icon="bi bi-bounding-box-circles"></ts-button>
+    <se-button id="tool_source" title="tools.tool_source" shortcut="U" icon="bi bi-gear"></se-button>
+    <se-button id="tool_wireframe" title="tools.wireframe_mode" shortcut="F" icon="bi bi-bounding-box-circles"></se-button>
   </div> <!-- editor_panel -->
   <div id="history_panel">
     <div class="tool_sep"></div>
-    <ts-button id="tool_undo" title="tools.undo" shortcut="ctrl+Z" icon="bi bi-arrow-counterclockwise" disabled></ts-button>
-    <ts-button id="tool_redo" title="tools.redo" shortcut="ctrl+Y" icon="bi bi-arrow-clockwise" disabled></ts-button>
+    <se-button id="tool_undo" title="tools.undo" shortcut="ctrl+Z" icon="bi bi-arrow-counterclockwise" disabled></se-button>
+    <se-button id="tool_redo" title="tools.redo" shortcut="ctrl+Y" icon="bi bi-arrow-clockwise" disabled></se-button>
   </div> <!-- history_panel -->
   <!-- Buttons when a single element is selected -->
   <div class="selected_panel">
     <div class="tool_sep"></div>
-    <ts-button id="tool_clone" title="tools.clone" shortcut="D" icon="bi bi-copy"></ts-button>
-    <ts-button id="tool_delete" title="tools.del" shortcut="Delete/Backspace" icon="bi bi-trash"></ts-button>
+    <se-button id="tool_clone" title="tools.clone" shortcut="D" icon="bi bi-copy"></se-button>
+    <se-button id="tool_delete" title="tools.del" shortcut="Delete/Backspace" icon="bi bi-trash"></se-button>
   </div>
   <div class="selected_panel">
     <div class="tool_sep"></div>
-    <ts-button id="tool_move_top" title="tools.move_top" shortcut="Ctrl+Shift+]" icon="bi bi-front"></ts-button>
-    <ts-button id="tool_move_bottom" title="tools.move_bottom" shortcut="Ctrl+Shift+[" icon="bi bi-back"></ts-button>
+    <se-button id="tool_move_top" title="tools.move_top" shortcut="Ctrl+Shift+]" icon="bi bi-front"></se-button>
+    <se-button id="tool_move_bottom" title="tools.move_bottom" shortcut="Ctrl+Shift+[" icon="bi bi-back"></se-button>
   </div>
   <div class="selected_panel">
-    <ts-button id="tool_topath" title="tools.to_path" icon="bi bi-share"></ts-button>
-    <ts-button id="tool_reorient" title="tools.reorient_path" icon="bi bi-square"></ts-button>
-    <ts-button id="tool_make_link" title="tools.make_link" icon="bi bi-link-45deg"></ts-button>
+    <se-button id="tool_topath" title="tools.to_path" icon="bi bi-share"></se-button>
+    <se-button id="tool_reorient" title="tools.reorient_path" icon="bi bi-square"></se-button>
+    <se-button id="tool_make_link" title="tools.make_link" icon="bi bi-link-45deg"></se-button>
   </div>
   <div class="selected_panel">
     <div class="tool_sep"></div>
     <se-input id="elem_id" data-attr="id" size="10" label="properties.id_label" title="properties.id"></se-input>
   </div>
   <div class="selected_panel">
-    <se-input id="elem_class" data-attr="class" size="10" label="properties.class_label" title="properties.class">
-    </se-input>
-    <se-spin-input size="3" id="angle" min=-180 max=180 step=5 src="angle.svg" title="properties.angle">
-    </se-spin-input>
-    <se-spin-input size="2" id="blur" min=0 max=100 step=5 src="blur.svg" title="properties.blur"></se-spin-input>
+    <se-input id="elem_class" data-attr="class" size="10" label="properties.class_label" title="properties.class"></se-input>
+    <se-spin-input size="3" id="angle" min="-180" max="180" step="5" type="text" title="properties.angle" label="angle "></se-spin-input>
+    <se-spin-input size="2" id="blur" min=0 max=100 step=5 type="text" title="properties.blur" label="blur "></se-spin-input>
     <se-list id="tool_position" title="tools.align_to_page" label="" width="22px" height="22px">
       <se-list-item id="tool_posleft" value="l" title="tools.align_left" src="align_left.svg" img-height="22px">
       </se-list-item>
@@ -68,28 +66,25 @@
   <!-- Buttons when multiple elements are selected -->
   <div class="multiselected_panel">
     <div class="tool_sep"></div>
-    <se-button id="tool_clone_multi" title="tools.clone" shortcut="C" src="clone.svg"></se-button>
-    <se-button id="tool_delete_multi" title="tools.del" shortcut="Delete/Backspace" src="delete.svg"></se-button>
+    <se-button id="tool_clone_multi" title="tools.clone" shortcut="C" icon="bi bi-copy"></se-button>
+    <se-button id="tool_delete_multi" title="tools.del" shortcut="Delete/Backspace" icon="bi bi-trash"></se-button>
   </div>
   <div class="multiselected_panel">
     <div class="tool_sep"></div>
-    <se-button id="tool_group_elements" title="tools.group_elements" shortcut="G" src="group_elements.svg">
-    </se-button>
-    <se-button id="tool_make_link_multi" title="tools.make_link" src="globe_link.svg"></se-button>
-    <se-button id="tool_align_left" title="tools.align_left" src="align_left.svg"></se-button>
-    <se-button id="tool_align_center" title="tools.align_center" src="align_center.svg"></se-button>
-    <se-button id="tool_align_right" title="tools.align_right" src="align_right.svg"></se-button>
-    <se-button id="tool_align_top" title="tools.align_top" src="align_top.svg"></se-button>
-    <se-button id="tool_align_middle" title="tools.align_middle" src="align_middle.svg"></se-button>
-    <se-button id="tool_align_bottom" title="tools.align_bottom" src="align_bottom.svg"></se-button>
-    <se-button id="tool_align_distrib_horiz" title="tools.align_distrib_horiz"
-      src="align_distrib_horiz.svg"></se-button>
-    <se-button id="tool_align_distrib_verti" title="tools.align_distrib_verti"
-      src="align_distrib_verti.svg"></se-button>
+    <se-button id="tool_group_elements" title="tools.group_elements" shortcut="G" icon="bi bi-collection"></se-button>
+    <se-button id="tool_make_link_multi" title="tools.make_link" icon="bi bi-link-45deg"></se-button>
+    <se-button id="tool_align_left" title="tools.align_left" icon="bi bi-align-start"></se-button>
+    <se-button id="tool_align_center" title="tools.align_center" icon="bi bi-align-center"></se-button>
+    <se-button id="tool_align_right" title="tools.align_right" icon="bi bi-align-end"></se-button>
+    <se-button id="tool_align_top" title="tools.align_top" icon="bi bi-align-top"></se-button>
+    <se-button id="tool_align_middle" title="tools.align_middle" icon="bi bi-align-middle"></se-button>
+    <se-button id="tool_align_bottom" title="tools.align_bottom" icon="bi bi-align-bottom"></se-button>
+    <se-button id="tool_align_distrib_horiz" title="tools.align_distrib_horiz" icon="bi bi-distribute-horizontal"></se-button>
+    <se-button id="tool_align_distrib_verti" title="tools.align_distrib_verti" icon="bi bi-distribute-vertical"></se-button>
     <se-select id="tool_align_relative" label="tools.relativeTo"
       options="tools.selected_objects,tools.largest_object,tools.smallest_object,tools.page"
       values="selected::largest::smallest::page">
-      </se-list-item>
+      <se-list-item />
     </se-select>
   </div> <!-- multiselected_panel -->
   <div class="rect_panel">
