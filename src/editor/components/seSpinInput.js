@@ -43,8 +43,14 @@ template.innerHTML = `
     width: 54px;
     height: 24px;
   }
+  i {
+    color: var(--icon-color);
+    font-size: 16px;
+    line-height: 24px;
+  }
   </style>
   <div>
+  <i alt="icon"></i>
   <img alt="icon" width="24" height="24" aria-labelledby="label" />
   <span id="label">label</span>
   <elix-number-spin-box min="1" step="1"></elix-number-spin-box>
@@ -58,26 +64,29 @@ export class SESpinInput extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.append(template.content.cloneNode(true))
     // locate the component
     this.$div = this._shadowRoot.querySelector('div')
-    this.$img = this._shadowRoot.querySelector('img')
     this.$label = this.shadowRoot.getElementById('label')
     this.$event = new CustomEvent('change')
     this.$input = this._shadowRoot.querySelector('elix-number-spin-box')
+
+    this.$img = this._shadowRoot.querySelector('img')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
+
+    this.$icon = this._shadowRoot.querySelector('i')
   }
 
   /**
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
-    return ['value', 'label', 'src', 'size', 'min', 'max', 'step', 'title']
+  static get observedAttributes() {
+    return ['value', 'label', 'src', 'size', 'min', 'max', 'step', 'title', 'icon']
   }
 
   /**
@@ -87,7 +96,7 @@ export class SESpinInput extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'title':
@@ -99,10 +108,27 @@ export class SESpinInput extends HTMLElement {
       case 'src':
         this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         this.$label.remove()
+        this.$icon.remove()
+        this.$div.classList.add('imginside')        
+        break
+      case 'icon':
+        this.$label.remove()
+        this.$img.remove()
         this.$div.classList.add('imginside')
+        this.$icon.setAttribute('class', newValue);
+
+        // add icon css
+        const style = document.createElement('style');
+        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
+        var styleCtx = '';
+        cssIconPaths.forEach((path) => {
+          styleCtx += `@import url("${path}");`;
+        });
+        style.textContent = styleCtx;
+        this._shadowRoot.prepend(style);
         break
       case 'size':
-      // access to the underlying input box
+        // access to the underlying input box
         this.$input.shadowRoot.getElementById('input').size = newValue
         // below seems mandatory to override the default width style that takes precedence on size
         this.$input.shadowRoot.getElementById('input').style.width = 'unset'
@@ -119,6 +145,7 @@ export class SESpinInput extends HTMLElement {
       case 'label':
         this.$label.textContent = t(newValue)
         this.$img.remove()
+        this.$icon.remove()
         break
       case 'value':
         this.$input.value = newValue
@@ -133,7 +160,7 @@ export class SESpinInput extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -141,7 +168,7 @@ export class SESpinInput extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -149,7 +176,23 @@ export class SESpinInput extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get label () {
+  get icon() {
+    return this.getAttribute('icon')
+  }
+
+  /**
+   * @function set
+   * @returns {void}
+   */
+  set icon(value) {
+    this.setAttribute('icon', value)
+  }
+
+  /**
+   * @function get
+   * @returns {any}
+   */
+  get label() {
     return this.getAttribute('label')
   }
 
@@ -157,7 +200,7 @@ export class SESpinInput extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set label (value) {
+  set label(value) {
     this.setAttribute('label', value)
   }
 
@@ -165,7 +208,7 @@ export class SESpinInput extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get value () {
+  get value() {
     return this.$input.value
   }
 
@@ -173,7 +216,7 @@ export class SESpinInput extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set value (value) {
+  set value(value) {
     this.$input.value = value
   }
 
@@ -181,7 +224,7 @@ export class SESpinInput extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get src () {
+  get src() {
     return this.getAttribute('src')
   }
 
@@ -189,7 +232,7 @@ export class SESpinInput extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set src (value) {
+  set src(value) {
     this.setAttribute('src', value)
   }
 
@@ -197,7 +240,7 @@ export class SESpinInput extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get size () {
+  get size() {
     return this.getAttribute('size')
   }
 
@@ -205,7 +248,7 @@ export class SESpinInput extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set size (value) {
+  set size(value) {
     this.setAttribute('size', value)
   }
 
@@ -213,7 +256,7 @@ export class SESpinInput extends HTMLElement {
    * @function connectedCallback
    * @returns {void}
    */
-  connectedCallback () {
+  connectedCallback() {
     const shadow = this.$input.shadowRoot
     const childNodes = Array.from(shadow.childNodes)
     childNodes.forEach((childNode) => {
