@@ -7,6 +7,7 @@ template.innerHTML = `
 #select-container {
   margin-top: 10px;
   display: inline-block;
+  text-align: center;
 }
 
 #select-container:hover {
@@ -32,6 +33,9 @@ template.innerHTML = `
 #options-container {
   position: fixed;
 }
+i {
+  color: var(--icon-color);
+}
 
 </style>
   <label>Label</label>
@@ -50,7 +54,7 @@ export class SeList extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
@@ -81,7 +85,7 @@ export class SeList extends HTMLElement {
       if (element.getAttribute('value') === newValue) {
         element.setAttribute('selected', true)
         if (element.hasAttribute('src')) {
-        // empty current selection children
+          // empty current selection children
           while (this.$selection.firstChild) { this.$selection.removeChild(this.$selection.firstChild) }
           // replace selection child with image of new value
           const img = document.createElement('img')
@@ -89,6 +93,15 @@ export class SeList extends HTMLElement {
           img.style.height = element.getAttribute('img-height')
           img.setAttribute('title', t(element.getAttribute('title')))
           this.$selection.append(img)
+        } else if (element.hasAttribute('icon')) {
+          // empty current selection children
+          while (this.$selection.firstChild) { this.$selection.removeChild(this.$selection.firstChild) }
+          // replace selection child with image of new value
+          const icon = document.createElement('i')
+          icon.className = element.getAttribute('icon')
+          icon.style.fontSize = element.getAttribute('icon-size')
+          icon.setAttribute('title', t(element.getAttribute('title')))
+          this.$selection.append(icon)
         } else {
           this.$selection.textContent = t(element.getAttribute('option'))
         }
@@ -102,8 +115,8 @@ export class SeList extends HTMLElement {
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
-    return ['label', 'width', 'height', 'title', 'value']
+  static get observedAttributes() {
+    return ['label', 'width', 'height', 'title', 'value', 'has-icon']
   }
 
   /**
@@ -113,7 +126,7 @@ export class SeList extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'title':
@@ -131,6 +144,19 @@ export class SeList extends HTMLElement {
       case 'value':
         this.updateSelectedValue(newValue)
         break
+      case 'has-icon':
+        if (newValue) {
+          // add icon css
+          const style = document.createElement('style');
+          const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
+          var styleCtx = '';
+          cssIconPaths.forEach((path) => {
+            styleCtx += `@import url("${path}");`;
+          });
+          style.textContent = styleCtx;
+          this._shadowRoot.prepend(style);
+        }
+        break;
       default:
         console.error(`unknown attribute: ${name}`)
         break
@@ -141,7 +167,23 @@ export class SeList extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get hasIcon() {
+    return this.getAttribute('has-icon')
+  }
+
+  /**
+   * @function set
+   * @returns {void}
+   */
+  set hasIcon(value) {
+    this.setAttribute('has-icon', value)
+  }
+
+  /**
+   * @function get
+   * @returns {any}
+   */
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -149,7 +191,7 @@ export class SeList extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -157,7 +199,7 @@ export class SeList extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get label () {
+  get label() {
     return this.getAttribute('label')
   }
 
@@ -165,7 +207,7 @@ export class SeList extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set label (value) {
+  set label(value) {
     this.setAttribute('label', value)
   }
 
@@ -173,7 +215,7 @@ export class SeList extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get width () {
+  get width() {
     return this.getAttribute('width')
   }
 
@@ -181,7 +223,7 @@ export class SeList extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set width (value) {
+  set width(value) {
     this.setAttribute('width', value)
   }
 
@@ -189,7 +231,7 @@ export class SeList extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get height () {
+  get height() {
     return this.getAttribute('height')
   }
 
@@ -197,7 +239,7 @@ export class SeList extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set height (value) {
+  set height(value) {
     this.setAttribute('height', value)
   }
 
@@ -229,7 +271,7 @@ export class SeList extends HTMLElement {
    * @function connectedCallback
    * @returns {void}
    */
-  connectedCallback () {
+  connectedCallback() {
     const currentObj = this
     this.$dropdown.addEventListener('selectedindexchange', (e) => {
       if (e?.detail?.selectedItem !== undefined) {

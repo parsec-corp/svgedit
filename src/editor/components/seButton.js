@@ -130,7 +130,6 @@ export class ToolButton extends HTMLElement {
         });
         style.textContent = styleCtx;
         this._shadowRoot.prepend(style);
-
         break
       case 'pressed':
         if (newValue === null) {

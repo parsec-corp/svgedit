@@ -16,8 +16,13 @@ template.innerHTML = `
     background-color: var(--icon-bg-color-hover);
   }
 
+  i {
+    color: var(--icon-color);
+  }
+
   </style>
   <div aria-label="option">
+    <i alt="icon"></i>
     <img alt="icon" />
     <slot></slot>
   </div>
@@ -29,17 +34,20 @@ export class SeListItem extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.append(template.content.cloneNode(true))
     this.$menuitem = this._shadowRoot.querySelector('[aria-label=option]')
-    // this.$svg = this.$menuitem.shadowRoot.querySelector('#checkmark')
-    // this.$svg.setAttribute('style', 'display: none;')
+
     this.$img = this._shadowRoot.querySelector('img')
     this.$img.setAttribute('style', 'display: none;')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
+
+    this.$icon = this._shadowRoot.querySelector('i')
+    this.$icon.setAttribute('style', 'display: none;')
+
     this.$menuitem.addEventListener('mousedown', e => {
       this.$menuitem.dispatchEvent(new CustomEvent('selectedindexchange', {
         bubbles: true,
@@ -53,8 +61,8 @@ export class SeListItem extends HTMLElement {
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
-    return ['option', 'src', 'title', 'img-height', 'selected']
+  static get observedAttributes() {
+    return ['option', 'src', 'title', 'img-height', 'selected', 'icon', 'icon-size']
   }
 
   /**
@@ -64,7 +72,7 @@ export class SeListItem extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'option':
@@ -75,8 +83,27 @@ export class SeListItem extends HTMLElement {
         this.$img.setAttribute('style', 'display: block;')
         this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         break
+      case 'icon':
+        this.$icon.setAttribute('class', newValue);
+        this.$icon.setAttribute('style', 'display: block;')
+
+        // add icon css
+        const style = document.createElement('style');
+        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
+        var styleCtx = '';
+        cssIconPaths.forEach((path) => {
+          styleCtx += `@import url("${path}");`;
+        });
+        style.textContent = styleCtx;
+        this._shadowRoot.prepend(style);
+        break
+      case 'icon-size':
+        this.$icon.setAttribute('style', `font-size: ${newValue};`)
+        break;
       case 'title':
-        this.$img.setAttribute('title', t(newValue))
+        const title = t(newValue);
+        this.$img.setAttribute('title', title);
+        this.$icon.setAttribute('title', title);
         break
       case 'img-height':
         this.$img.setAttribute('height', newValue)
@@ -98,7 +125,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get option () {
+  get option() {
     return this.getAttribute('option')
   }
 
@@ -106,7 +133,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set option (value) {
+  set option(value) {
     this.setAttribute('option', value)
   }
 
@@ -114,7 +141,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -122,7 +149,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -130,7 +157,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get imgHeight () {
+  get imgHeight() {
     return this.getAttribute('img-height')
   }
 
@@ -138,7 +165,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set imgHeight (value) {
+  set imgHeight(value) {
     this.setAttribute('img-height', value)
   }
 
@@ -146,7 +173,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get src () {
+  get src() {
     return this.getAttribute('src')
   }
 
@@ -154,8 +181,40 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set src (value) {
+  set src(value) {
     this.setAttribute('src', value)
+  }
+
+  /**
+   * @function get
+   * @returns {any}
+   */
+  get icon() {
+    return this.getAttribute('icon')
+  }
+
+  /**
+   * @function set
+   * @returns {void}
+   */
+  set icon(value) {
+    this.setAttribute('icon', value)
+  }
+
+  /**
+   * @function get
+   * @returns {any}
+   */
+  get iconSize() {
+    return this.getAttribute('icon-size')
+  }
+
+  /**
+   * @function set
+   * @returns {void}
+   */
+  set iconSize(value) {
+    this.setAttribute('icon-size', value)
   }
 }
 

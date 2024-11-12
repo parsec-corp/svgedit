@@ -36,23 +36,15 @@
     <se-input id="elem_class" data-attr="class" size="10" label="properties.class_label" title="properties.class"></se-input>
     <se-spin-input size="3" id="angle" min="-180" max="180" step="5" type="text" title="properties.angle" label="angle "></se-spin-input>
     <se-spin-input size="2" id="blur" min=0 max=100 step=5 type="text" title="properties.blur" label="blur "></se-spin-input>
-    <se-list id="tool_position" title="tools.align_to_page" label="" width="22px" height="22px">
-      <se-list-item id="tool_posleft" value="l" title="tools.align_left" src="align_left.svg" img-height="22px">
-      </se-list-item>
-      <se-list-item id="tool_poscenter" value="c" title="tools.align_center" src="align_center.svg"
-        img-height="22px"></se-list-item>
-      <se-list-item id="tool_posright" value="r" title="tools.align_right" src="align_right.svg"
-        img-height="22px"></se-list-item>
-      <se-list-item id="tool_postop" value="t" title="tools.align_top" src="align_top.svg" img-height="22px">
-      </se-list-item>
-      <se-list-item id="tool_posmiddle" value="m" title="tools.align_middle" src="align_middle.svg"
-        img-height="22px"></se-list-item>
-      <se-list-item id="tool_posbottom" value="b" src="align_bottom.svg" title="tools.align_bottom"
-        img-height="22px"></se-list-item>
-      <se-list-item id="tool_poshoriz" value="dh" src="align_distrib_horiz.svg" title="tools.align_distrib_horiz"
-        img-height="22px"></se-list-item>
-      <se-list-item id="tool_posverti" value="dv" src="align_distrib_verti.svg" title="tools.align_distrib_verti"
-        img-height="22px"></se-list-item>
+    <se-list id="tool_position" title="tools.align_to_page" label="" width="22px" height="22px" has-icon="true">
+      <se-list-item id="tool_posleft" value="l" title="tools.align_left" icon="bi bi-align-start" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_poscenter" value="c" title="tools.align_center" icon="bi bi-align-center" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_posright" value="r" title="tools.align_right" icon="bi bi-align-end" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_postop" value="t" title="tools.align_top" icon="bi bi-align-top" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_posmiddle" value="m" title="tools.align_middle" icon="bi bi-align-middle" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_posbottom" value="b" title="tools.align_bottom" icon="bi bi-align-bottom" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_poshoriz" value="dh" title="tools.align_distrib_horiz" icon="bi bi-distribute-horizontal" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_posverti" value="dv" title="tools.align_distrib_verti" icon="bi bi-distribute-vertical" icon-size="18px"></se-list-item>
     </se-list>
   </div>
   <div class="xy_panel">
