@@ -25,6 +25,7 @@ template.innerHTML = `
     background-color: var(--icon-bg-color);
     cursor: pointer;
     border-radius: 3px;
+    text-align: center;
   }
   .small {
     width: 14px;

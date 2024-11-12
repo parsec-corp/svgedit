@@ -127,43 +127,33 @@
   </div>
   <div class="text_panel">
     <!-- Text styles -->
-    <se-button id="tool_bold" title="properties.bold" src="bold.svg" shortcut="B"></se-button>
-    <se-button id="tool_italic" title="properties.italic" src="italic.svg" shortcut="I"></se-button>
-    <se-button id="tool_text_decoration_underline" title="properties.text_decoration_underline"
-      src="text_decoration_underline.svg"></se-button>
-    <se-button id="tool_text_decoration_linethrough" title="properties.text_decoration_linethrough"
-      src="text_decoration_linethrough.svg"></se-button>
-    <se-button id="tool_text_decoration_overline" title="properties.text_decoration_overline"
-      src="text_decoration_overline.svg"></se-button>
+    <se-button id="tool_bold" title="properties.bold" icon="bi bi-type-bold" shortcut="B"></se-button>
+    <se-button id="tool_italic" title="properties.italic" icon="bi bi-type-italic" shortcut="I"></se-button>
+    <se-button id="tool_text_decoration_underline" title="properties.text_decoration_underline" icon="bi bi-type-underline"></se-button>
+    <se-button id="tool_text_decoration_linethrough" title="properties.text_decoration_linethrough" icon="bi bi-type-strikethrough"></se-button>
 
     <!-- Font Size-->
     <se-select id="tool_font_family" label="properties.font_family_label"
       options="properties.serif,properties.sans_serif,properties.cursive,properties.fantasy,properties.monospace,properties.courier,properties.helvetica,properties.times"
       values="Serif::Sans-serif::Cursive::Fantasy::Monospace::Courier::Helvetica::Times"></se-select>
     <se-spin-input size="2" id="font_size" min=1 max=1000 step=1 title="properties.font_size"
-      src="fontsize.svg"></se-spin-input>
+      icon="bi bi-type"></se-spin-input>
 
     <!-- Text Anchor -->
-    <se-list id="tool_text_anchor" label="" width="22px" height="22px">
-      <se-list-item id="tool_text_anchor_start" value="start" title="properties.text_anchor_start"
-        src="anchor_start.svg" img-height="25px"></se-list-item>
-      <se-list-item id="tool_text_anchor_middle" value="middle" title="properties.text_anchor_middle"
-        src="anchor_middle.svg" img-height="25px"></se-list-item>
-      <se-list-item id="tool_text_anchor_end" value="end" title="properties.text_anchor_end" src="anchor_end.svg"
-        img-height="25px"></se-list-item>
+    <se-list id="tool_text_anchor" label="" width="22px" height="22px" has-icon="true">
+      <se-list-item id="tool_text_anchor_start" value="start" title="properties.text_anchor_start" icon="bi bi-text-left" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_text_anchor_middle" value="middle" title="properties.text_anchor_middle" icon="bi bi-text-center" icon-size="18px"></se-list-item>
+      <se-list-item id="tool_text_anchor_end" value="end" title="properties.text_anchor_end" icon="bi bi-text-right" icon-size="18px"></se-list-item>
     </se-list>
 
     <!-- Letter Spacing -->
-    <se-spin-input size="2" id="tool_letter_spacing" min=0 max=100 step=1 title="properties.text_letter_spacing"
-      src="letter_spacing.svg"></se-spin-input>
+    <se-spin-input size="2" id="tool_letter_spacing" min=0 max=100 step=1 title="properties.text_letter_spacing" icon="bi bi-arrows-expand-vertical"></se-spin-input>
 
     <!-- Word Spacing -->
-    <se-spin-input size="2" id="tool_word_spacing" min=0 max=1000 step=1 title="properties.text_word_spacing"
-      src="word_spacing.svg"></se-spin-input>
+    <se-spin-input size="2" id="tool_word_spacing" min=0 max=1000 step=1 title="properties.text_word_spacing" icon="bi bi-arrows"></se-spin-input>
 
     <!-- Text Length -->
-    <se-spin-input size="2" id="tool_text_length" min=0 max=1000 step=1 title="properties.text_length"
-      src="text_length.svg"></se-spin-input>
+    <se-spin-input size="2" id="tool_text_length" min=0 max=1000 step=1 title="properties.text_length" icon="bi bi-arrows-expand-vertical"></se-spin-input>
 
     <!-- Length Adjust -->
     <se-select id="tool_length_adjust" label="properties.text_length_adjust"
@@ -177,10 +167,10 @@
     <se-input id="g_title" data-attr="title" size="8" label="properties.label"></se-input>
   </div> <!-- container_panel -->
   <div class="use_panel">
-    <se-button id="tool_unlink_use" title="tools.tool_unlink_use" src="unlink_use.svg"></se-button>
+    <se-button id="tool_unlink_use" title="tools.tool_unlink_use" icon="bi bi-slash-circle"></se-button>
   </div> <!-- use_panel -->
   <div class="g_panel">
-    <se-button id="tool_ungroup" title="tools.ungroup" src="ungroup.svg"></se-button>
+    <se-button id="tool_ungroup" title="tools.ungroup" icon="bi bi-file-break"></se-button>
   </div> <!-- g_panel -->
   <!-- For anchor elements -->
   <div class="a_panel">

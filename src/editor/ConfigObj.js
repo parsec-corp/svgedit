@@ -135,7 +135,7 @@ export default class ConfigObj {
       imgPath: './images',
       extPath: './extensions',
       compPath: './components',
-      cssIconPaths: ['./styles/bootstrap-icons.css', './styles/fontawesome.css'],
+      cssIconPaths: ['./styles/bootstrap-icons.css'],
       // DOCUMENT PROPERTIES
       // Change the following to a preference (already in the Document Properties dialog)?
       dimensions: [640, 480],

@@ -378,9 +378,7 @@ class TopPanel {
           $id('tool_text_decoration_underline').pressed =
             this.editor.svgCanvas.hasTextDecoration('underline')
           $id('tool_text_decoration_linethrough').pressed =
-            this.editor.svgCanvas.hasTextDecoration('line-through')
-          $id('tool_text_decoration_overline').pressed =
-            this.editor.svgCanvas.hasTextDecoration('overline')
+            this.editor.svgCanvas.hasTextDecoration('line-through')          
           $id('tool_font_family').value = elem.getAttribute('font-family')
           $id('tool_text_anchor').setAttribute(
             'value',
@@ -995,9 +993,6 @@ class TopPanel {
     )
     $click($id('tool_text_decoration_linethrough'), () =>
       this.clickTextDecoration.bind(this)('line-through')
-    )
-    $click($id('tool_text_decoration_overline'), () =>
-      this.clickTextDecoration.bind(this)('overline')
     )
     $id('tool_text_anchor').addEventListener('change', evt =>
       this.clickTextAnchor.bind(this)(evt)
