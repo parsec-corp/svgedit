@@ -37,45 +37,8 @@ const logHexColors = (value) => {
   }
 };
 
-// Modify the SVG elements
-const modifySVG = (node) => {
-
-  // Function to replace hex color codes
-  const replaceHexColors = (value) => {
-    return value.replace(hexColorRegex, (match) => {
-      return newColor;
-    });
-  };
-
-  // Check and modify attributes that may contain hex colors
-  for (const [key, value] of Object.entries(node.attributes)) {
-    if (typeof value === 'string' && hexColorRegex.test(value)) {
-      node.attributes[key] = replaceHexColors(value);
-    }
-  }
-
-  // Check and modify the style attribute if it exists
-  if (node.attributes.style) {
-    node.attributes.style = replaceHexColors(node.attributes.style);
-  }
-
-  // Recursively modify child nodes
-  if (node.children) {
-    node.children.forEach(modifySVG);
-  }
-};
-
 // Process each SVG file
 svgFiles.forEach(svgFilePath => {
-
-  // Read the SVG file
-  //const data = fs.readFileSync(svgFilePath, 'utf8');
-
-  // Log hex color codes found in the SVG string
-  //logHexColors(data);
-
-  //console.log(svgFilePath); // TODO
-  //return;
 
   // Read the SVG file  
   fs.readFile(svgFilePath, 'utf8', (err, data) => {
@@ -92,15 +55,20 @@ svgFiles.forEach(svgFilePath => {
 
         // Function to replace hex color codes
         const replaceHexColors = (value) => {
-          return value.replace(hexColorRegex, (match) => {            
+          return value.replace(hexColorRegex, (match) => {
             return newColor;
           });
         };
 
+        if (typeof node.value === 'string') {
+          node.value = replaceHexColors(node.value);
+        }
+
         // Check and modify attributes that may contain hex colors
         for (const [key, value] of Object.entries(node.attributes)) {
+
           if (typeof value === 'string' && hexColorRegex.test(value)) {
-            node.attributes[key] = replaceHexColors(value);            
+            node.attributes[key] = replaceHexColors(value);
           }
         }
 
@@ -130,11 +98,8 @@ svgFiles.forEach(svgFilePath => {
         }
         console.log('Modified SVG file saved:', outputFilePath);
       });
-    }).catch(err => {      
+    }).catch(err => {
       console.error('Error parsing SVG:', err, svgFilePath);
     });
   });
 });
-
-// Log all found hex colors
-//console.log('Found hex colors:', Array.from(hexColors));
