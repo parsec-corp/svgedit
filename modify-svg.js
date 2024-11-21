@@ -3,7 +3,7 @@ const path = require('path');
 const { parse, stringify } = require('svgson');
 
 const imageDir = './src/editor/images';
-const newColor = '#eeeef2';
+const newColor = '#343a40';
 
 // Function to get all SVG files in a directory recursively
 const getAllSvgFiles = (dir, fileList = []) => {

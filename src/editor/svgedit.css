@@ -15,6 +15,22 @@
   --global-se-spin-input-width: 82px;
 }
 
+/* TS Custom */
+.svg_editor {
+  --main-bg-color: #eeeef2;
+  --text-color: #343a40;
+  --border-color: #eee;
+  --canvas-bg-color: #B2B2B2;
+  --link-color: #343a40;
+  --ruler-color: #B2B2B2;
+  --icon-bg-color: #eeeef2;
+  --icon-bg-color-hover: #c9def5;
+  --icon-color: #343a40;
+  --input-color: #FFFFF;
+  --input-bg-color: #FFFFF;
+  --input-border-color: #343a40;
+}
+
 .svg_editor * {
   transform-origin: 0 0;
 }
