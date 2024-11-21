@@ -59,8 +59,9 @@ svgFiles.forEach(svgFilePath => {
 
             // these svgs, only replace the yellow
             if (fileName.startsWith('linecap_') || fileName.startsWith('linejoin_')) {
-
+              
               if (match.toLowerCase() == '#f9ba00') return newColor;
+              if (match.toLowerCase() == '#f8bb00') return newColor;
 
               return match;
             }

@@ -136,6 +136,7 @@ export default class ConfigObj {
       extPath: './extensions',
       compPath: './components',
       cssIconPaths: ['./styles/bootstrap-icons.css'],
+      textColor: '#343a40',
       // DOCUMENT PROPERTIES
       // Change the following to a preference (already in the Document Properties dialog)?
       dimensions: [640, 480],
