@@ -76,7 +76,7 @@ export default {
         const title = `${name}:buttons.0.title`
         const key = `${name}:buttons.0.key`
         buttonTemplate.innerHTML = `
-        <se-button id="tool_layerView" title="${title}" shortcut="${key}" icon="bi bi-stack"></se-button>`
+      <se-button id="tool_layerView" title="${title}" shortcut="${key}" src="layer_view.svg"></se-button>`
         $id('editor_panel').append(buttonTemplate.content.cloneNode(true))
         $click($id('tool_layerView'), clickLayerView.bind(this))
       }

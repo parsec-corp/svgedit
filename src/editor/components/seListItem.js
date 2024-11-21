@@ -16,13 +16,8 @@ template.innerHTML = `
     background-color: var(--icon-bg-color-hover);
   }
 
-  i {
-    color: var(--icon-color);
-  }
-
   </style>
   <div aria-label="option">
-    <i alt="icon"></i>
     <img alt="icon" />
     <slot></slot>
   </div>
@@ -40,14 +35,11 @@ export class SeListItem extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.append(template.content.cloneNode(true))
     this.$menuitem = this._shadowRoot.querySelector('[aria-label=option]')
-
+    // this.$svg = this.$menuitem.shadowRoot.querySelector('#checkmark')
+    // this.$svg.setAttribute('style', 'display: none;')
     this.$img = this._shadowRoot.querySelector('img')
     this.$img.setAttribute('style', 'display: none;')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
-
-    this.$icon = this._shadowRoot.querySelector('i')
-    this.$icon.setAttribute('style', 'display: none;')
-
     this.$menuitem.addEventListener('mousedown', e => {
       this.$menuitem.dispatchEvent(new CustomEvent('selectedindexchange', {
         bubbles: true,
@@ -62,7 +54,7 @@ export class SeListItem extends HTMLElement {
    * @returns {any} observed
    */
   static get observedAttributes() {
-    return ['option', 'src', 'title', 'img-height', 'selected', 'icon', 'icon-size']
+    return ['option', 'src', 'title', 'img-height', 'selected']
   }
 
   /**
@@ -83,27 +75,8 @@ export class SeListItem extends HTMLElement {
         this.$img.setAttribute('style', 'display: block;')
         this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         break
-      case 'icon':
-        this.$icon.setAttribute('class', newValue);
-        this.$icon.setAttribute('style', 'display: block;')
-
-        // add icon css
-        const style = document.createElement('style');
-        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
-        var styleCtx = '';
-        cssIconPaths.forEach((path) => {
-          styleCtx += `@import url("${path}");`;
-        });
-        style.textContent = styleCtx;
-        this._shadowRoot.prepend(style);
-        break
-      case 'icon-size':
-        this.$icon.setAttribute('style', `font-size: ${newValue};`)
-        break;
       case 'title':
-        const title = t(newValue);
-        this.$img.setAttribute('title', title);
-        this.$icon.setAttribute('title', title);
+        this.$img.setAttribute('title', t(newValue))
         break
       case 'img-height':
         this.$img.setAttribute('height', newValue)
@@ -183,38 +156,6 @@ export class SeListItem extends HTMLElement {
    */
   set src(value) {
     this.setAttribute('src', value)
-  }
-
-  /**
-   * @function get
-   * @returns {any}
-   */
-  get icon() {
-    return this.getAttribute('icon')
-  }
-
-  /**
-   * @function set
-   * @returns {void}
-   */
-  set icon(value) {
-    this.setAttribute('icon', value)
-  }
-
-  /**
-   * @function get
-   * @returns {any}
-   */
-  get iconSize() {
-    return this.getAttribute('icon-size')
-  }
-
-  /**
-   * @function set
-   * @returns {void}
-   */
-  set iconSize(value) {
-    this.setAttribute('icon-size', value)
   }
 }
 

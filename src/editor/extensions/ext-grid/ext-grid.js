@@ -23,7 +23,7 @@ const loadExtensionTranslation = async function (svgEditor) {
 
 export default {
   name,
-  async init () {
+  async init() {
     const svgEditor = this
     await loadExtensionTranslation(svgEditor)
     const { svgCanvas } = svgEditor
@@ -154,15 +154,15 @@ export default {
     }
     return {
       name: svgEditor.i18next.t(`${name}:name`),
-      zoomChanged (zoom) {
+      zoomChanged(zoom) {
         if (showGrid) { updateGrid(zoom) }
       },
-      callback () {
+      callback() {
         // Add the button and its handler(s)
         const buttonTemplate = document.createElement('template')
         const title = `${name}:buttons.0.title`
         buttonTemplate.innerHTML = `
-          <se-button id="view_grid" title="${title}" icon="bi bi-grid-3x3"></se-button>
+          <se-button id="view_grid" title="${title}" src="grid.svg"></se-button>
         `
         $id('editor_panel').append(buttonTemplate.content.cloneNode(true))
         $click($id('view_grid'), () => {

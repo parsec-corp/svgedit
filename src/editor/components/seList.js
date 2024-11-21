@@ -7,7 +7,6 @@ template.innerHTML = `
 #select-container {
   margin-top: 10px;
   display: inline-block;
-  text-align: center;
 }
 
 #select-container:hover {
@@ -32,9 +31,6 @@ template.innerHTML = `
 
 #options-container {
   position: fixed;
-}
-i {
-  color: var(--icon-color);
 }
 
 </style>
@@ -93,15 +89,6 @@ export class SeList extends HTMLElement {
           img.style.height = element.getAttribute('img-height')
           img.setAttribute('title', t(element.getAttribute('title')))
           this.$selection.append(img)
-        } else if (element.hasAttribute('icon')) {
-          // empty current selection children
-          while (this.$selection.firstChild) { this.$selection.removeChild(this.$selection.firstChild) }
-          // replace selection child with image of new value
-          const icon = document.createElement('i')
-          icon.className = element.getAttribute('icon')
-          icon.style.fontSize = element.getAttribute('icon-size')
-          icon.setAttribute('title', t(element.getAttribute('title')))
-          this.$selection.append(icon)
         } else {
           this.$selection.textContent = t(element.getAttribute('option'))
         }
@@ -116,7 +103,7 @@ export class SeList extends HTMLElement {
    * @returns {any} observed
    */
   static get observedAttributes() {
-    return ['label', 'width', 'height', 'title', 'value', 'has-icon']
+    return ['label', 'width', 'height', 'title', 'value']
   }
 
   /**
@@ -144,39 +131,10 @@ export class SeList extends HTMLElement {
       case 'value':
         this.updateSelectedValue(newValue)
         break
-      case 'has-icon':
-        if (newValue) {
-          // add icon css
-          const style = document.createElement('style');
-          const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
-          var styleCtx = '';
-          cssIconPaths.forEach((path) => {
-            styleCtx += `@import url("${path}");`;
-          });
-          style.textContent = styleCtx;
-          this._shadowRoot.prepend(style);
-        }
-        break;
       default:
         console.error(`unknown attribute: ${name}`)
         break
     }
-  }
-
-  /**
-   * @function get
-   * @returns {any}
-   */
-  get hasIcon() {
-    return this.getAttribute('has-icon')
-  }
-
-  /**
-   * @function set
-   * @returns {void}
-   */
-  set hasIcon(value) {
-    this.setAttribute('has-icon', value)
   }
 
   /**

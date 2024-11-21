@@ -43,14 +43,8 @@ template.innerHTML = `
     width: 54px;
     height: 24px;
   }
-  i {
-    color: var(--icon-color);
-    font-size: 16px;
-    line-height: 24px;
-  }
   </style>
   <div>
-  <i alt="icon"></i>
   <img alt="icon" width="24" height="24" aria-labelledby="label" />
   <span id="label">label</span>
   <elix-number-spin-box min="1" step="1"></elix-number-spin-box>
@@ -71,14 +65,11 @@ export class SESpinInput extends HTMLElement {
     this._shadowRoot.append(template.content.cloneNode(true))
     // locate the component
     this.$div = this._shadowRoot.querySelector('div')
+    this.$img = this._shadowRoot.querySelector('img')
     this.$label = this.shadowRoot.getElementById('label')
     this.$event = new CustomEvent('change')
     this.$input = this._shadowRoot.querySelector('elix-number-spin-box')
-
-    this.$img = this._shadowRoot.querySelector('img')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
-
-    this.$icon = this._shadowRoot.querySelector('i')
   }
 
   /**
@@ -86,7 +77,7 @@ export class SESpinInput extends HTMLElement {
    * @returns {any} observed
    */
   static get observedAttributes() {
-    return ['value', 'label', 'src', 'size', 'min', 'max', 'step', 'title', 'icon']
+    return ['value', 'label', 'src', 'size', 'min', 'max', 'step', 'title']
   }
 
   /**
@@ -108,24 +99,7 @@ export class SESpinInput extends HTMLElement {
       case 'src':
         this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         this.$label.remove()
-        this.$icon.remove()
-        this.$div.classList.add('imginside')        
-        break
-      case 'icon':
-        this.$label.remove()
-        this.$img.remove()
         this.$div.classList.add('imginside')
-        this.$icon.setAttribute('class', newValue);
-
-        // add icon css
-        const style = document.createElement('style');
-        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
-        var styleCtx = '';
-        cssIconPaths.forEach((path) => {
-          styleCtx += `@import url("${path}");`;
-        });
-        style.textContent = styleCtx;
-        this._shadowRoot.prepend(style);
         break
       case 'size':
         // access to the underlying input box
@@ -145,7 +119,6 @@ export class SESpinInput extends HTMLElement {
       case 'label':
         this.$label.textContent = t(newValue)
         this.$img.remove()
-        this.$icon.remove()
         break
       case 'value':
         this.$input.value = newValue
@@ -170,22 +143,6 @@ export class SESpinInput extends HTMLElement {
    */
   set title(value) {
     this.setAttribute('title', value)
-  }
-
-  /**
-   * @function get
-   * @returns {any}
-   */
-  get icon() {
-    return this.getAttribute('icon')
-  }
-
-  /**
-   * @function set
-   * @returns {void}
-   */
-  set icon(value) {
-    this.setAttribute('icon', value)
   }
 
   /**

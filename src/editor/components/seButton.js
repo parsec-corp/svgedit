@@ -25,7 +25,6 @@ template.innerHTML = `
     background-color: var(--icon-bg-color);
     cursor: pointer;
     border-radius: 3px;
-    text-align: center;
   }
   .small {
     width: 14px;
@@ -38,15 +37,6 @@ template.innerHTML = `
     width: 100%;
     height: 100%;
   }
-  i {
-    color: var(--icon-color);
-    font-size: 18px;
-    line-height: 24px;
-  }
-  .small i {
-    font-size: 10px;
-    line-height: 14px;
-  }
   .pressed {
     background-color: var(--icon-bg-color-hover);
   }
@@ -56,7 +46,6 @@ template.innerHTML = `
   }
   </style>
   <div title="title">
-    <i alt="icon"></i>
     <img alt="icon">
   </div>
 `
@@ -74,13 +63,8 @@ export class ToolButton extends HTMLElement {
     this._shadowRoot.append(template.content.cloneNode(true))
     // locate the component
     this.$div = this._shadowRoot.querySelector('div')
-
     this.$img = this._shadowRoot.querySelector('img')
-    this.$img.setAttribute('style', 'display: none;')
     this.imgPath = svgEditor.configObj.curConfig.imgPath
-
-    this.$icon = this._shadowRoot.querySelector('i')
-    this.$icon.setAttribute('style', 'display: none;')
   }
 
   /**
@@ -88,7 +72,7 @@ export class ToolButton extends HTMLElement {
    * @returns {any} observed
    */
   static get observedAttributes() {
-    return ['title', 'src', 'pressed', 'disabled', 'size', 'style', 'icon']
+    return ['title', 'src', 'pressed', 'disabled', 'size', 'style']
   }
 
   /**
@@ -116,21 +100,6 @@ export class ToolButton extends HTMLElement {
         } else {
           this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         }
-        this.$img.setAttribute('style', 'display: block;')
-        break
-      case 'icon':
-        this.$icon.setAttribute('class', newValue);
-        this.$icon.setAttribute('style', 'display: block;')
-
-        // add icon css
-        const style = document.createElement('style');
-        const cssIconPaths = svgEditor.configObj.curConfig.cssIconPaths;
-        var styleCtx = '';
-        cssIconPaths.forEach((path) => {
-          styleCtx += `@import url("${path}");`;
-        });
-        style.textContent = styleCtx;
-        this._shadowRoot.prepend(style);
         break
       case 'pressed':
         if (newValue === null) {
@@ -231,22 +200,6 @@ export class ToolButton extends HTMLElement {
    */
   set src(value) {
     this.setAttribute('src', value)
-  }
-
-  /**
-   * @function get
-   * @returns {any}
-   */
-  get icon() {
-    return this.getAttribute('icon')
-  }
-
-  /**
-   * @function set
-   * @returns {void}
-   */
-  set icon(value) {
-    this.setAttribute('icon', value)
   }
 
   /**
