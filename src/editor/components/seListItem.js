@@ -29,7 +29,7 @@ export class SeListItem extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
@@ -53,7 +53,7 @@ export class SeListItem extends HTMLElement {
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
+  static get observedAttributes() {
     return ['option', 'src', 'title', 'img-height', 'selected']
   }
 
@@ -64,7 +64,7 @@ export class SeListItem extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'option':
@@ -98,7 +98,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get option () {
+  get option() {
     return this.getAttribute('option')
   }
 
@@ -106,7 +106,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set option (value) {
+  set option(value) {
     this.setAttribute('option', value)
   }
 
@@ -114,7 +114,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -122,7 +122,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -130,7 +130,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get imgHeight () {
+  get imgHeight() {
     return this.getAttribute('img-height')
   }
 
@@ -138,7 +138,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set imgHeight (value) {
+  set imgHeight(value) {
     this.setAttribute('img-height', value)
   }
 
@@ -146,7 +146,7 @@ export class SeListItem extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get src () {
+  get src() {
     return this.getAttribute('src')
   }
 
@@ -154,7 +154,7 @@ export class SeListItem extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set src (value) {
+  set src(value) {
     this.setAttribute('src', value)
   }
 }

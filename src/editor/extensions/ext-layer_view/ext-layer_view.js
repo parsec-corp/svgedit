@@ -22,7 +22,7 @@ const loadExtensionTranslation = async function (svgEditor) {
 
 export default {
   name,
-  async init (_S) {
+  async init(_S) {
     const svgEditor = this
     const { svgCanvas } = svgEditor
     const { $id, $click } = svgCanvas
@@ -57,7 +57,7 @@ export default {
     return {
       name: svgEditor.i18next.t(`${name}:name`),
       // The callback should be used to load the DOM with the appropriate UI items
-      layersChanged () {
+      layersChanged() {
         if ($id('tool_layerView').pressed) {
           updateLayerView()
         } if (svgEditor.configObj.curConfig.layerView) {
@@ -66,12 +66,12 @@ export default {
           updateLayerView()
         }
       },
-      layerVisChanged () {
+      layerVisChanged() {
         if ($id('tool_layerView').pressed) {
           $id('tool_layerView').pressed = !$id('tool_layerView').pressed
         }
       },
-      callback () {
+      callback() {
         const buttonTemplate = document.createElement('template')
         const title = `${name}:buttons.0.title`
         const key = `${name}:buttons.0.key`

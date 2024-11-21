@@ -16,14 +16,14 @@ class TopPanel {
   /**
    * @param {PlainObject} editor svgedit handler
    */
-  constructor (editor) {
+  constructor(editor) {
     this.editor = editor
   }
 
   /**
    * @type {module}
    */
-  displayTool (className) {
+  displayTool(className) {
     // default display is 'none' so removing the property will make the panel visible
     $qa(`.${className}`).map(el => el.style.removeProperty('display'))
   }
@@ -31,7 +31,7 @@ class TopPanel {
   /**
    * @type {module}
    */
-  hideTool (className) {
+  hideTool(className) {
     $qa(`.${className}`).forEach(el => {
       el.style.display = 'none'
     })
@@ -40,21 +40,21 @@ class TopPanel {
   /**
    * @type {module}
    */
-  get selectedElement () {
+  get selectedElement() {
     return this.editor.selectedElement
   }
 
   /**
    * @type {module}
    */
-  get multiselected () {
+  get multiselected() {
     return this.editor.multiselected
   }
 
   /**
    * @type {module}
    */
-  get path () {
+  get path() {
     return this.editor.svgCanvas.pathActions
   }
 
@@ -64,7 +64,7 @@ class TopPanel {
    * @param {boolean} changeElem
    * @returns {void}
    */
-  setStrokeOpt (opt, changeElem) {
+  setStrokeOpt(opt, changeElem) {
     const { id } = opt
     const bits = id.split('_')
     const [pre, val] = bits
@@ -90,7 +90,7 @@ class TopPanel {
    * context panel.
    * @returns {void}
    */
-  update () {
+  update() {
     let i
     let len
     // set title
@@ -163,7 +163,7 @@ class TopPanel {
    * @param {boolean} [opts.cancelDeletes=false]
    * @returns {void} Resolves to `undefined`
    */
-  promptImgURL ({ cancelDeletes = false } = {}) {
+  promptImgURL({ cancelDeletes = false } = {}) {
     let curhref = this.editor.svgCanvas.getHref(this.editor.selectedElement)
     curhref = curhref.startsWith('data:') ? '' : curhref
     const url = prompt(
@@ -181,7 +181,7 @@ class TopPanel {
    * Updates the context panel tools based on the selected element.
    * @returns {void}
    */
-  updateContextPanel () {
+  updateContextPanel() {
     let elem = this.editor.selectedElement
     // If element has just been deleted, consider it null
     if (!elem?.parentNode) {
@@ -242,7 +242,7 @@ class TopPanel {
           if (['g', 'polyline', 'path'].includes(elname)) {
             const bb = this.editor.svgCanvas.getStrokedBBox([elem])
             if (bb) {
-              ;({ x, y } = bb)
+              ; ({ x, y } = bb)
             }
           } else {
             x = elem.getAttribute('x')
@@ -423,7 +423,7 @@ class TopPanel {
       )
       menuItems.setAttribute(
         (tagName === 'g' || !this.multiselected ? 'dis' : 'en') +
-          'ablemenuitems',
+        'ablemenuitems',
         '#group'
       )
 
@@ -475,7 +475,7 @@ class TopPanel {
    * @param {boolean} forSaving
    * @returns {void}
    */
-  showSourceEditor (e, forSaving) {
+  showSourceEditor(e, forSaving) {
     const $editorDialog = document.getElementById('se-svg-editor-dialog')
     if ($editorDialog.getAttribute('dialog') === 'open') return
     const origSource = this.editor.svgCanvas.getSvgString()
@@ -489,7 +489,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clickWireframe () {
+  clickWireframe() {
     $id('tool_wireframe').pressed = !$id('tool_wireframe').pressed
     this.editor.workarea.classList.toggle('wireframe')
 
@@ -510,7 +510,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clickUndo () {
+  clickUndo() {
     const { undoMgr, textActions } = this.editor.svgCanvas
     if (undoMgr.getUndoStackSize() > 0) {
       undoMgr.undo()
@@ -525,7 +525,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clickRedo () {
+  clickRedo() {
     const { undoMgr } = this.editor.svgCanvas
     if (undoMgr.getRedoStackSize() > 0) {
       undoMgr.redo()
@@ -536,21 +536,21 @@ class TopPanel {
   /**
    * @type {module}
    */
-  changeRectRadius (e) {
+  changeRectRadius(e) {
     this.editor.svgCanvas.setRectRadius(e.target.value)
   }
 
   /**
    * @type {module}
    */
-  changeFontSize (e) {
+  changeFontSize(e) {
     this.editor.svgCanvas.setFontSize(e.target.value)
   }
 
   /**
    * @type {module}
    */
-  changeRotationAngle (e) {
+  changeRotationAngle(e) {
     this.editor.svgCanvas.setRotationAngle(e.target.value)
     if (Number.parseInt(e.target.value) === 0) {
       $id('tool_reorient').classList.add('disabled')
@@ -563,7 +563,7 @@ class TopPanel {
    * @param {PlainObject} e
    * @returns {void}
    */
-  changeBlur (e) {
+  changeBlur(e) {
     this.editor.svgCanvas.setBlur(e.target.value / 10, true)
   }
 
@@ -571,7 +571,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clickGroup () {
+  clickGroup() {
     // group
     if (this.editor.multiselected) {
       this.editor.svgCanvas.groupSelectedElements()
@@ -585,7 +585,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clickClone () {
+  clickClone() {
     this.editor.svgCanvas.cloneSelectedElements(20, 20)
   }
 
@@ -593,7 +593,7 @@ class TopPanel {
    * @param {PlainObject} evt
    * @returns {void}
    */
-  clickAlignEle (evt) {
+  clickAlignEle(evt) {
     this.editor.svgCanvas.alignSelectedElements(evt.detail.value, 'page')
   }
 
@@ -601,7 +601,7 @@ class TopPanel {
    * @param {string} pos indicate the alignment relative to top, bottom, middle etc..
    * @returns {void}
    */
-  clickAlign (pos) {
+  clickAlign(pos) {
     let value = $id('tool_align_relative').value
     if (value === '') {
       value = 'selected'
@@ -613,7 +613,7 @@ class TopPanel {
    *
    * @type {module}
    */
-  attrChanger (e) {
+  attrChanger(e) {
     const attr = e.target.getAttribute('data-attr')
     let val = e.target.value
     const valid = isValidUnit(attr, val, this.selectedElement)
@@ -651,7 +651,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  convertToPath () {
+  convertToPath() {
     if (this.editor.selectedElement) {
       this.editor.svgCanvas.convertToPath()
     }
@@ -661,7 +661,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  reorientPath () {
+  reorientPath() {
     if (this.editor.selectedElement) {
       this.path.reorient()
     }
@@ -671,7 +671,7 @@ class TopPanel {
    *
    * @returns {void} Resolves to `undefined`
    */
-  makeHyperlink () {
+  makeHyperlink() {
     if (this.editor.selectedElement || this.multiselected) {
       const url = prompt(
         this.editor.i18next.t('notification.enterNewLinkURL'),
@@ -687,7 +687,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  linkControlPoints () {
+  linkControlPoints() {
     $id('tool_node_link').pressed = !$id('tool_node_link').pressed
     const linked = !!$id('tool_node_link').pressed
     this.path.linkControlPoints(linked)
@@ -697,7 +697,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  clonePathNode () {
+  clonePathNode() {
     if (this.path.getNodePoint()) {
       this.path.clonePathNode()
     }
@@ -707,7 +707,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  deletePathNode () {
+  deletePathNode() {
     if (this.path.getNodePoint()) {
       this.path.deletePathNode()
     }
@@ -717,7 +717,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  addSubPath () {
+  addSubPath() {
     const button = $id('tool_add_subpath')
     const sp = !button.classList.contains('pressed')
     button.pressed = sp
@@ -729,7 +729,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  opencloseSubPath () {
+  opencloseSubPath() {
     this.path.opencloseSubPath()
   }
 
@@ -738,7 +738,7 @@ class TopPanel {
    * an element has been selected.
    * @returns {void}
    */
-  deleteSelected () {
+  deleteSelected() {
     if (this.editor.selectedElement || this.editor.multiselected) {
       this.editor.svgCanvas.deleteSelectedElements()
     }
@@ -748,7 +748,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  moveToTopSelected () {
+  moveToTopSelected() {
     if (this.editor.selectedElement) {
       this.editor.svgCanvas.moveToTopSelectedElement()
     }
@@ -758,7 +758,7 @@ class TopPanel {
    *
    * @returns {void}
    */
-  moveToBottomSelected () {
+  moveToBottomSelected() {
     if (this.editor.selectedElement) {
       this.editor.svgCanvas.moveToBottomSelectedElement()
     }
@@ -768,7 +768,7 @@ class TopPanel {
    * Checks if there are currently selected text elements to avoid firing of bold,italic when no text selected
    * @returns {boolean}
    */
-  get anyTextSelected () {
+  get anyTextSelected() {
     const selected = this.editor.svgCanvas.getSelectedElements()
     return selected.filter(el => el.tagName === 'text').length > 0
   }
@@ -777,7 +777,7 @@ class TopPanel {
    *
    * @returns {false}
    */
-  clickBold () {
+  clickBold() {
     if (this.anyTextSelected) {
       this.editor.svgCanvas.setBold(!this.editor.svgCanvas.getBold())
       this.updateContextPanel()
@@ -789,7 +789,7 @@ class TopPanel {
    *
    * @returns {false}
    */
-  clickItalic () {
+  clickItalic() {
     if (this.anyTextSelected) {
       this.editor.svgCanvas.setItalic(!this.editor.svgCanvas.getItalic())
       this.updateContextPanel()
@@ -803,7 +803,7 @@ class TopPanel {
    * @param value The text decoration value
    * @returns {boolean} false
    */
-  clickTextDecoration (value) {
+  clickTextDecoration(value) {
     if (this.editor.svgCanvas.hasTextDecoration(value)) {
       this.editor.svgCanvas.removeTextDecoration(value)
     } else {
@@ -818,7 +818,7 @@ class TopPanel {
    *
    * @returns {false}
    */
-  clickTextAnchor (evt) {
+  clickTextAnchor(evt) {
     this.editor.svgCanvas.setTextAnchor(evt.detail.value)
     return false
   }
@@ -826,28 +826,28 @@ class TopPanel {
   /**
    * @type {module}
    */
-  changeLetterSpacing (e) {
+  changeLetterSpacing(e) {
     this.editor.svgCanvas.setLetterSpacing(e.target.value)
   }
 
   /**
    * @type {module}
    */
-  changeWordSpacing (e) {
+  changeWordSpacing(e) {
     this.editor.svgCanvas.setWordSpacing(e.target.value)
   }
 
   /**
    * @type {module}
    */
-  changeTextLength (e) {
+  changeTextLength(e) {
     this.editor.svgCanvas.setTextLength(e.target.value)
   }
 
   /**
    * @type {module}
    */
-  changeLengthAdjust (evt) {
+  changeLengthAdjust(evt) {
     this.editor.svgCanvas.setLengthAdjust(evt.detail.value)
   }
 
@@ -857,7 +857,7 @@ class TopPanel {
    * @param {string} url
    * @returns {void}
    */
-  setImageURL (url) {
+  setImageURL(url) {
     const { editor } = this
     if (!url) {
       url = editor.defaultImageURL
@@ -896,7 +896,7 @@ class TopPanel {
   /**
    *
    */
-  updateTitle (title) {
+  updateTitle(title) {
     if (title) this.editor.title = title
     const titleElement = $qa('#title_panel > p')[0]
     if (titleElement) titleElement.textContent = this.editor.title
@@ -907,7 +907,7 @@ class TopPanel {
    * @param {module:svgcanvas.SvgCanvas#event:selected} elems
    * @returns {void}
    */
-  togglePathEditMode (editMode, elems) {
+  togglePathEditMode(editMode, elems) {
     if (editMode) {
       this.displayTool('path_node_panel')
     } else {
@@ -932,7 +932,7 @@ class TopPanel {
   /**
    * @type {module}
    */
-  init () {
+  init() {
     // add Top panel
     const template = document.createElement('template')
     const { i18next } = this.editor
@@ -996,9 +996,6 @@ class TopPanel {
     $click($id('tool_text_decoration_linethrough'), () =>
       this.clickTextDecoration.bind(this)('line-through')
     )
-    $click($id('tool_text_decoration_overline'), () =>
-      this.clickTextDecoration.bind(this)('overline')
-    )
     $id('tool_text_anchor').addEventListener('change', evt =>
       this.clickTextAnchor.bind(this)(evt)
     )
@@ -1022,32 +1019,32 @@ class TopPanel {
       this.setImageURL(evt.currentTarget.value)
     })
 
-    // all top panel attributes
-    ;[
-      'elem_id',
-      'elem_class',
-      'circle_cx',
-      'circle_cy',
-      'circle_r',
-      'ellipse_cx',
-      'ellipse_cy',
-      'ellipse_rx',
-      'ellipse_ry',
-      'selected_x',
-      'selected_y',
-      'rect_width',
-      'rect_height',
-      'line_x1',
-      'line_x2',
-      'line_y1',
-      'line_y2',
-      'image_width',
-      'image_height',
-      'path_node_x',
-      'path_node_y'
-    ].forEach(attrId =>
-      $id(attrId).addEventListener('change', this.attrChanger.bind(this))
-    )
+      // all top panel attributes
+      ;[
+        'elem_id',
+        'elem_class',
+        'circle_cx',
+        'circle_cy',
+        'circle_r',
+        'ellipse_cx',
+        'ellipse_cy',
+        'ellipse_rx',
+        'ellipse_ry',
+        'selected_x',
+        'selected_y',
+        'rect_width',
+        'rect_height',
+        'line_x1',
+        'line_x2',
+        'line_y1',
+        'line_y2',
+        'image_width',
+        'image_height',
+        'path_node_x',
+        'path_node_y'
+      ].forEach(attrId =>
+        $id(attrId).addEventListener('change', this.attrChanger.bind(this))
+      )
   }
 }
 

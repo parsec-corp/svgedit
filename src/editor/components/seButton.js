@@ -56,7 +56,7 @@ export class ToolButton extends HTMLElement {
   /**
     * @function constructor
     */
-  constructor () {
+  constructor() {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
@@ -71,7 +71,7 @@ export class ToolButton extends HTMLElement {
    * @function observedAttributes
    * @returns {any} observed
    */
-  static get observedAttributes () {
+  static get observedAttributes() {
     return ['title', 'src', 'pressed', 'disabled', 'size', 'style']
   }
 
@@ -82,7 +82,7 @@ export class ToolButton extends HTMLElement {
    * @param {string} newValue
    * @returns {void}
    */
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
     switch (name) {
       case 'title':
@@ -132,7 +132,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get title () {
+  get title() {
     return this.getAttribute('title')
   }
 
@@ -140,7 +140,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set title (value) {
+  set title(value) {
     this.setAttribute('title', value)
   }
 
@@ -148,7 +148,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get pressed () {
+  get pressed() {
     return this.hasAttribute('pressed')
   }
 
@@ -156,7 +156,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set pressed (value) {
+  set pressed(value) {
     // boolean value => existence = true
     if (value) {
       this.setAttribute('pressed', 'true')
@@ -169,7 +169,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get disabled () {
+  get disabled() {
     return this.hasAttribute('disabled')
   }
 
@@ -177,7 +177,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set disabled (value) {
+  set disabled(value) {
     // boolean value => existence = true
     if (value) {
       this.setAttribute('disabled', 'true')
@@ -190,7 +190,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get src () {
+  get src() {
     return this.getAttribute('src')
   }
 
@@ -198,7 +198,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set src (value) {
+  set src(value) {
     this.setAttribute('src', value)
   }
 
@@ -206,7 +206,7 @@ export class ToolButton extends HTMLElement {
    * @function get
    * @returns {any}
    */
-  get size () {
+  get size() {
     return this.getAttribute('size')
   }
 
@@ -214,7 +214,7 @@ export class ToolButton extends HTMLElement {
    * @function set
    * @returns {void}
    */
-  set size (value) {
+  set size(value) {
     this.setAttribute('size', value)
   }
 
@@ -222,7 +222,7 @@ export class ToolButton extends HTMLElement {
    * @function connectedCallback
    * @returns {void}
    */
-  connectedCallback () {
+  connectedCallback() {
     // capture shortcuts
     const shortcut = this.getAttribute('shortcut')
     if (shortcut) {

@@ -4,7 +4,8 @@ template.innerHTML = `
   <style>
   input{
     border:unset;
-    background-color:var(--input-color);
+    background-color:var(--input-bg-color);
+    color: var(--input-color);
     min-width:unset;
     width:40px;
     height:23px;
@@ -37,7 +38,8 @@ template.innerHTML = `
     font-size: 7px;
     border-left:solid 1px transparent;
     border-right:solid 1px transparent;
-    background-color:var(--input-color);
+    background-color:var(--input-bg-color);
+    color: var(--input-color);
   }
   #arrow-up{
     height:9px;
@@ -85,10 +87,10 @@ template.innerHTML = `
   ::slotted(*) {
     margin:2px;
     padding:3px;
-    color:white;
+    color: var(--input-color);
   }
   ::slotted(*:hover) {
-    background-color: rgb(43, 60, 69);
+    background-color: var(--icon-bg-color-hover);
   }
   </style>
   <div id="tool-wrapper">

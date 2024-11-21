@@ -7,9 +7,28 @@
   --ruler-color: #B2B2B2;
   --icon-bg-color: #72797A;
   --icon-bg-color-hover: #2B3C45;
+  --icon-color: #FFFFFF;
   --input-color: #B2B2B2;
+  --input-bg-color: #FFF;
+  --input-border-color: #B2B2B2;
   --orange-color: #f9bc01;
   --global-se-spin-input-width: 82px;
+}
+
+/* TS Custom */
+.svg_editor {
+  --main-bg-color: #eeeef2;
+  --text-color: #343a40;
+  --border-color: #eee;
+  --canvas-bg-color: #B2B2B2;
+  --link-color: #343a40;
+  --ruler-color: #B2B2B2;
+  --icon-bg-color: #eeeef2;
+  --icon-bg-color-hover: #c9def5;
+  --icon-color: #343a40;
+  --input-color: #FFFFF;
+  --input-bg-color: #FFFFF;
+  --input-border-color: #343a40;
 }
 
 .svg_editor * {
@@ -34,8 +53,8 @@
   height: 100%;
 }
 
-#title_panel>p {
-  color: white;
+#title_panel > p {
+  color: var(--text-color);
   padding-left: 5px;
   padding-right: 3px;
   font-weight: bold;
@@ -84,7 +103,7 @@
 #sidepanel_handle {
   writing-mode: vertical-rl;
   text-orientation: upright;
-  color: white;
+  color: var(--text-color);
   position: absolute;
   cursor: pointer;
   top: 50%;
@@ -109,7 +128,7 @@ hr {
 }
 
 #layersLabel {
-  color: white;
+  color: var(--text-color);
 }
 
 #layerpanel {
@@ -196,7 +215,7 @@ hr {
 
 #main_button {
   grid-area: main;
-  color: #fff;
+  color: var(--text-color);
   border-radius: 3px;
   padding-block: 2px;
   padding-left: 3px;

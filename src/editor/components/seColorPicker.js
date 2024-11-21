@@ -799,7 +799,7 @@ export class SeColorPicker extends HTMLElement {
       jGraduateMethod(
         this.$color_picker,
         {
-          images: { clientPath: './components/jgraduate/images/' },
+          images: { clientPath: `${svgEditor.configObj.curConfig.compPath}/jgraduate/images/` },
           paint,
           window: { pickerTitle: this.label },
           newstop: 'inverse'

@@ -55,10 +55,10 @@ const config = [
         intro: 'const XDOMAIN = true;'
       },
       {
-        file: 'dist/editor/iife-Editor.js',
+        file: 'dist/editor/SvgEditor.js',
         format: 'iife',
         inlineDynamicImports: true,
-        name: 'Editor',
+        name: 'SvgEditor',
         sourcemap: true
       }
     ],
