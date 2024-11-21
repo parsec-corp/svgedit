@@ -5,6 +5,10 @@ const { parse, stringify } = require('svgson');
 const imageDir = './src/editor/images';
 const newColor = '#343a40';
 
+const svgSkipList = [
+  'opacity.svg'
+];
+
 // Function to get all SVG files in a directory recursively
 const getAllSvgFiles = (dir, fileList = []) => {
   const files = fs.readdirSync(dir);
@@ -23,22 +27,18 @@ const getAllSvgFiles = (dir, fileList = []) => {
 // Get all SVG files in the image directory
 const svgFiles = getAllSvgFiles(imageDir);
 
-const hexColors = new Set();
-
 // Regular expression to match hex color codes
 const hexColorRegex = /#([0-9a-fA-F]{3,6})/g;
-// Function to log hex color codes
-const logHexColors = (value) => {
-  const matches = value.match(hexColorRegex);
-  if (matches) {
-    matches.forEach(color => {
-      hexColors.add(color);
-    });
-  }
-};
 
 // Process each SVG file
 svgFiles.forEach(svgFilePath => {
+  const fileName = path.basename(svgFilePath);
+
+  // Skip the file if it is in the skip list
+  if (svgSkipList.includes(fileName)) {
+    console.log('Skipping file:', svgFilePath);
+    return;
+  }
 
   // Read the SVG file  
   fs.readFile(svgFilePath, 'utf8', (err, data) => {
@@ -56,6 +56,15 @@ svgFiles.forEach(svgFilePath => {
         // Function to replace hex color codes
         const replaceHexColors = (value) => {
           return value.replace(hexColorRegex, (match) => {
+
+            // these svgs, only replace the yellow
+            if (fileName.startsWith('linecap_') || fileName.startsWith('linejoin_')) {
+
+              if (match.toLowerCase() == '#f9ba00') return newColor;
+
+              return match;
+            }
+
             return newColor;
           });
         };
