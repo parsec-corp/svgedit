@@ -10,14 +10,14 @@ template.innerHTML = `
   }
   elix-menu-button::part(menu) {
     background-color: var(--icon-bg-color) !important;
-    color: #fff;
+    color: var(--text-color);
   }
   elix-menu-button::part(popup-toggle) {
     padding: 0.25em 0.30em !important
   }
   :host ::slotted([current]){
     background-color: var(--icon-bg-color-hover) !important;
-    color: #fff;
+    color: var(--text-color);
   }
   :host ::slotted(*){
     padding: 0.25em 1.25em 0.25em 0.25em !important;
