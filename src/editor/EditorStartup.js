@@ -131,7 +131,7 @@ class EditorStartup {
     this.bottomPanel.init()
     this.topPanel.init()
     this.layersPanel.init()
-    this.mainMenu.init()
+    //this.mainMenu.init()
 
     const { undoMgr } = this.svgCanvas
     this.canvMenu = $id('se-cmenu_canvas')

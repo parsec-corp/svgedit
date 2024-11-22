@@ -188,7 +188,7 @@ export default class ConfigObj {
       'ext-shapes',
       'ext-polystar',
       'ext-storage',
-      'ext-opensave',
+      // 'ext-opensave', disabled since turn off menu
       'ext-layer_view'
     ]
     this.curConfig = {
