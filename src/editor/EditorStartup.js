@@ -761,7 +761,7 @@ class EditorStartup {
       case 'square':
       case 'star':
       case 'polygon':
-        cs = `url("./images/cursors/${mode}_cursor.svg"), crosshair`
+        cs = `url("${this.configObj.curConfig.imgPath}/cursors/${mode}_cursor.svg"), crosshair`
         break
       case 'text':
         // #TODO: Cursor should be changed back to default after text element was created

@@ -21,3 +21,10 @@
   - Copy files *dist\editor\SvgEditor.js*, *dist\editor\SvgEditor.js* => *Ts\Scripts\svgedit*
 
 **IMPORTANT DO NOT** check in the updated SVG files. Undo the changes. The reason for this is some of the code in modify svg code needs to scan for specify colors when replacing. 
+
+
+## Testing Localhost
+1. Run `npm i` to install dependencies (Only once needed)
+1. Run `npm run build --workspace @svgedit/svgcanvas` to build the svgcanvas dependency locally (Only once needed)
+1. Run `npm run start` to start a local server
+1. Access `http://localhost:8000/src/editor/index.html` with a supported browser
