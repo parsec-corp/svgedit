@@ -95,7 +95,7 @@ export default {
     monospace: 'Monospace',
     courier: 'Courier',
     helvetica: 'Helvetica',
-    times: 'times',
+    times: 'Times',
     prefs_and_content: 'Store preferences and SVG content locally',
     prefs_only: 'Only store preferences locally',
     no_prefs_or_content: 'Do not store my preferences or SVG content locally',

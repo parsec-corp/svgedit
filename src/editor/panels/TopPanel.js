@@ -996,6 +996,9 @@ class TopPanel {
     $click($id('tool_text_decoration_linethrough'), () =>
       this.clickTextDecoration.bind(this)('line-through')
     )
+    $click($id('tool_text_decoration_overline'), () =>
+      this.clickTextDecoration.bind(this)('overline')
+    )
     $id('tool_text_anchor').addEventListener('change', evt =>
       this.clickTextAnchor.bind(this)(evt)
     )

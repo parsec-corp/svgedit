@@ -134,16 +134,6 @@ class LeftPanel {
    *
    * @returns {void}
    */
-  clickImage () {
-    if (this.updateLeftPanel('tool_image')) {
-      this.editor.svgCanvas.setMode('image')
-    }
-  }
-
-  /**
-   *
-   * @returns {void}
-   */
   clickZoom () {
     if (this.updateLeftPanel('tool_zoom')) {
       this.editor.svgCanvas.setMode('zoom')
@@ -204,8 +194,7 @@ class LeftPanel {
     // register actions for left panel
     $click($id('tool_select'), this.clickSelect.bind(this))
     $click($id('tool_fhpath'), this.clickFHPath.bind(this))
-    $click($id('tool_text'), this.clickText.bind(this))
-    $click($id('tool_image'), this.clickImage.bind(this))
+    $click($id('tool_text'), this.clickText.bind(this))    
     $click($id('tool_zoom'), this.clickZoom.bind(this))
     $id('tool_zoom').addEventListener('dblclick', this.dblclickZoom.bind(this))
     $click($id('tool_path'), this.clickPath.bind(this))

@@ -110,7 +110,7 @@ export default {
     monospace: 'Monospace',
     courier: 'Courier',
     helvetica: 'Helvetica',
-    times: 'times',
+    times: 'Times',
     prefs_and_content: 'Lagra inställningar och SVG-innehåll lokalt',
     prefs_only: 'Lagra endast inställningar lokalt',
     no_prefs_or_content: 'Lagra inte mina inställningar eller SVG-innehåll lokalt',
