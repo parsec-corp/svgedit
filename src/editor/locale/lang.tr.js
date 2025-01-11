@@ -111,7 +111,7 @@ export default {
     monospace: 'Monospace',
     courier: 'Courier',
     helvetica: 'Helvetica',
-    times: 'times',
+    times: 'Times',
     prefs_and_content: 'Seçenekleri ve SVG içeriğini yerel olarak sakla',
     prefs_only: 'Sadece seçenekleri yerel olarak sakla',
     no_prefs_or_content: 'SVG içeriğini ya da seçenekleri yerel olarak saklama!',

@@ -94,7 +94,7 @@ export default {
     monospace: 'Monospace',
     courier: 'Courier',
     helvetica: 'Helvetica',
-    times: 'times',
+    times: 'Times',
     prefs_and_content: 'Сохранять настройки и содержимое SVG локально',
     prefs_only: 'Сохранять локально только настройки',
     no_prefs_or_content: 'Не сохранять локально ни настройки ни содержимое SVG',

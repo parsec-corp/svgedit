@@ -110,7 +110,7 @@ export default {
     monospace: 'Monospace',
     courier: 'Courier',
     helvetica: 'Helvetica',
-    times: 'times',
+    times: 'Times',
     prefs_and_content: 'Зберігати параметри та вміст SVG локально',
     prefs_only: 'Зберігати тільки параметри локально',
     no_prefs_or_content: 'Не зберігати параметри або вміст SVG локально',
