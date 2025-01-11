@@ -37,7 +37,7 @@ export default {
 
     /**
      * @param {boolean} on true=display
-     * @param {string} tool "star" or "polygone"
+     * @param {string} tool "star" or "polygon"
      * @returns {void}
      */
     const showPanel = (on, tool) => {

@@ -35,7 +35,7 @@ export default {
     fill_color: 'Change fill color',
     stroke_color: 'Change stroke color',
     stroke_style: 'Change stroke dash style',
-    stroke_width: 'Change stroke width by 1, shift-click to change by 0.1',
+    stroke_width: 'Change stroke width by 1',
     pos_x: 'Change X coordinate',
     pos_y: 'Change Y coordinate',
     linecap_butt: 'Linecap: Butt',
